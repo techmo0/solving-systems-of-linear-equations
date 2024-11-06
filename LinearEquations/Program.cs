@@ -5,35 +5,43 @@ public class Program
 {
     public static void Main()
     {
-        var lines = File.ReadAllLines("input.txt");
-        var system = new double[lines.Length][];
-
-        for (int i = 0; i < lines.Length; i++)
-        {
-            system[i] = Array.ConvertAll(lines[i].Split(), double.Parse);
-        }
+        var input = File.ReadAllText("input.txt");
+        var systems = input.Split(new[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
         var gaussianSolver = new GaussianSolver();
         var jacobiSolver = new JacobiSolver();
 
-        try
+        foreach (var systemInput in systems)
         {
-            var gaussianSolution = gaussianSolver.Solve(system);
-            Console.WriteLine("Gaussian method solution: " + string.Join(", ", gaussianSolution));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Gaussian method error: " + ex.Message);
-        }
+            var lines = systemInput.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var system = new double[lines.Length][];
 
-        try
-        {
-            var jacobiSolution = jacobiSolver.Solve(system);
-            Console.WriteLine("Jacobi method solution: " + string.Join(", ", jacobiSolution));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Jacobi method error: " + ex.Message);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                system[i] = Array.ConvertAll(lines[i].Split(), double.Parse);
+            }
+
+            try
+            {
+                var gaussianSolution = gaussianSolver.Solve(system);
+                Console.WriteLine("Gaussian method solution: " + string.Join(", ", gaussianSolution));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Gaussian method error: " + ex.Message);
+            }
+
+            try
+            {
+                var jacobiSolution = jacobiSolver.Solve(system);
+                Console.WriteLine("Jacobi method solution: " + string.Join(", ", jacobiSolution));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Jacobi method error: " + ex.Message);
+            }
+
+            Console.WriteLine();
         }
     }
 }
@@ -53,7 +61,6 @@ public class GaussianSolver
             augmentedMatrix[i][n] = system[i][n];
         }
 
-       
         for (int i = 0; i < n; i++)
         {
             for (int k = i + 1; k < n; k++)
@@ -95,9 +102,9 @@ public class JacobiSolver
         if (n == 0 || system[0].Length != n + 1)
             throw new ArgumentException("Invalid system of equations.");
 
-        double[] x = new double[n]; 
-        double[] xNew = new double[n]; 
-        double tolerance = 1e-10; 
+        double[] x = new double[n];
+        double[] xNew = new double[n];
+        double tolerance = 1e-10;
         int maxIterations = 1000;
 
         for (int iteration = 0; iteration < maxIterations; iteration++)
@@ -112,7 +119,7 @@ public class JacobiSolver
                 }
                 xNew[i] = (system[i][n] - sum) / system[i][i];
             }
- 
+
             double maxDiff = 0;
             for (int i = 0; i < n; i++)
             {
@@ -121,7 +128,7 @@ public class JacobiSolver
 
             if (maxDiff < tolerance)
             {
-                return xNew; 
+                return xNew;
             }
 
             Array.Copy(xNew, x, n);
