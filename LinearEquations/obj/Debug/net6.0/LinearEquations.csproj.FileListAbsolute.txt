@@ -1,0 +1,15 @@
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.csproj.AssemblyReference.cache
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.GeneratedMSBuildEditorConfig.editorconfig
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.AssemblyInfoInputs.cache
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.AssemblyInfo.cs
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.csproj.CoreCompileInputs.cache
+E:\prj\Kursach\LinearEquations\LinearEquations\bin\Debug\net6.0\LinearEquations.exe
+E:\prj\Kursach\LinearEquations\LinearEquations\bin\Debug\net6.0\LinearEquations.deps.json
+E:\prj\Kursach\LinearEquations\LinearEquations\bin\Debug\net6.0\LinearEquations.runtimeconfig.json
+E:\prj\Kursach\LinearEquations\LinearEquations\bin\Debug\net6.0\LinearEquations.dll
+E:\prj\Kursach\LinearEquations\LinearEquations\bin\Debug\net6.0\LinearEquations.pdb
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.dll
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\refint\LinearEquations.dll
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.pdb
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\LinearEquations.genruntimeconfig.cache
+E:\prj\Kursach\LinearEquations\LinearEquations\obj\Debug\net6.0\ref\LinearEquations.dll
