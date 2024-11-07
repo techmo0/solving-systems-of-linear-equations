@@ -1,5 +1,9 @@
 ﻿using System;
 using System.IO;
+public abstract class SolverInterface
+{
+    public abstract double[] Solve(double[][] system);
+}
 
 public class Program
 {
@@ -46,9 +50,9 @@ public class Program
     }
 }
 
-public class GaussianSolver
+public class GaussianSolver : SolverInterface
 {
-    public double[] Solve(double[][] system)
+    public override double[] Solve(double[][] system)
     {
         int n = system.Length;
         double[][] augmentedMatrix = new double[n][];
@@ -93,9 +97,9 @@ public class GaussianSolver
     }
 }
 
-public class JacobiSolver
+public class JacobiSolver : SolverInterface
 {
-    public double[] Solve(double[][] system)
+    public override double[] Solve(double[][] system)
     {
         int n = system.Length;
 
