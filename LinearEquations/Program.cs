@@ -55,6 +55,13 @@ public class GaussianSolver : SolverInterface
     public override double[] Solve(double[][] system)
     {
         int n = system.Length;
+
+        foreach (var row in system)
+        {
+            if (row.Length != n + 1)
+                throw new ArgumentException("Each equation must have exactly " + (n + 1) + " coefficients.");
+        }
+
         double[][] augmentedMatrix = new double[n][];
 
         for (int i = 0; i < n; i++)
@@ -102,6 +109,12 @@ public class JacobiSolver : SolverInterface
     public override double[] Solve(double[][] system)
     {
         int n = system.Length;
+
+        foreach (var row in system)
+        {
+            if (row.Length != n + 1)
+                throw new ArgumentException("Each equation must have exactly " + (n + 1) + " coefficients.");
+        }
 
         if (n == 0 || system[0].Length != n + 1)
             throw new ArgumentException("Invalid system of equations.");

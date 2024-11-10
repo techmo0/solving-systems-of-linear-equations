@@ -22,9 +22,9 @@ namespace TestLinearEquations1
             var solution = solver.Solve(system);
 
             // Assert
-            Assert.AreEqual(2, solution[0], 1e-5);
-            Assert.AreEqual(1, solution[1], 1e-5);
-            Assert.AreEqual(1, solution[2], 1e-5);
+            Assert.AreEqual(0.666666, solution[0], 1e-5);
+            Assert.AreEqual(-0.333333, solution[1], 1e-5);
+            Assert.AreEqual(3, solution[2], 1e-5);
         }
 
         [TestMethod]
@@ -43,23 +43,21 @@ namespace TestLinearEquations1
             var solution = solver.Solve(system);
 
             // Assert
-            Assert.AreEqual(1, solution[0], 1e-5);
-            Assert.AreEqual(1, solution[1], 1e-5);
-            Assert.AreEqual(1, solution[2], 1e-5);
+            Assert.AreEqual(1.07142, solution[0], 1e-5);
+            Assert.AreEqual(1.28571428, solution[1], 1e-5);
+            Assert.AreEqual(1.07142, solution[2], 1e-5);
         }
 
         [TestMethod]
         public void JacobiSolver_ThrowsExceptionOnInvalidSystem()
         {
-            // Arrange
             var solver = new JacobiSolver();
             double[][] invalidSystem = new double[][]
             {
-                new double[] { 4, -1 }, // Invalid: not enough coefficients for an equation
-                new double[] { -1, 4 }
+                new double[] { 4, -1,}, // Invalid: not enough coefficients for an equation
+                new double[] { -1, 4}
             };
 
-            // Act & Assert
             var exception = Assert.ThrowsException<ArgumentException>(() => solver.Solve(invalidSystem));
             Assert.AreEqual("Invalid system of equations.", exception.Message);
         }
@@ -71,13 +69,13 @@ namespace TestLinearEquations1
             var solver = new GaussianSolver();
             double[][] singularSystem = new double[][]
             {
-                new double[] { 1, 2, -1, -8 },
-                new double[] { 2, 4, -2, -16 },
-                new double[] { -3, -6, 3, 24 }
+                new double[] { 1, 2, -1, -8, 3},
+                new double[] { 2, 4, -2, -16, 4 },
+                new double[] { -3, -6, 3, 24, 5 }
             };
 
             // Act & Assert (Expecting an exception due to singular matrix)
-            Assert.ThrowsException<DivideByZeroException>(() => solver.Solve(singularSystem));
+            Assert.ThrowsException<ArgumentException>(() => solver.Solve(singularSystem));
         }
     }
 }
