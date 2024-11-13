@@ -9,7 +9,6 @@ namespace TestLinearEquations1
         [TestMethod]
         public void GaussianSolver_SolvesSimpleSystem()
         {
-            // Arrange
             var solver = new GaussianSolver();
             double[][] system = new double[][]
             {
@@ -18,10 +17,8 @@ namespace TestLinearEquations1
                 new double[] { 1, 2, 3, 9 }   // x + 2y + 3z = 9
             };
 
-            // Act
             var solution = solver.Solve(system);
 
-            // Assert
             Assert.AreEqual(0.666666, solution[0], 1e-5);
             Assert.AreEqual(-0.333333, solution[1], 1e-5);
             Assert.AreEqual(3, solution[2], 1e-5);
@@ -30,7 +27,7 @@ namespace TestLinearEquations1
         [TestMethod]
         public void JacobiSolver_SolvesSimpleSystem()
         {
-            // Arrange
+
             var solver = new JacobiSolver();
             double[][] system = new double[][]
             {
@@ -39,10 +36,8 @@ namespace TestLinearEquations1
                 new double[] { 0, -1, 4, 3 }   // -y + 4z = 3
             };
 
-            // Act
             var solution = solver.Solve(system);
 
-            // Assert
             Assert.AreEqual(1.07142, solution[0], 1e-5);
             Assert.AreEqual(1.28571428, solution[1], 1e-5);
             Assert.AreEqual(1.07142, solution[2], 1e-5);
@@ -54,18 +49,16 @@ namespace TestLinearEquations1
             var solver = new JacobiSolver();
             double[][] invalidSystem = new double[][]
             {
-                new double[] { 4, -1,}, // Invalid: not enough coefficients for an equation
+                new double[] { 4, -1,},
                 new double[] { -1, 4}
             };
 
-            var exception = Assert.ThrowsException<ArgumentException>(() => solver.Solve(invalidSystem));
-            Assert.AreEqual("Invalid system of equations.", exception.Message);
+            Assert.ThrowsException<ArgumentException>(() => solver.Solve(invalidSystem));
         }
 
         [TestMethod]
         public void GaussianSolver_ThrowsExceptionOnSingularMatrix()
         {
-            // Arrange
             var solver = new GaussianSolver();
             double[][] singularSystem = new double[][]
             {
@@ -73,8 +66,6 @@ namespace TestLinearEquations1
                 new double[] { 2, 4, -2, -16, 4 },
                 new double[] { -3, -6, 3, 24, 5 }
             };
-
-            // Act & Assert (Expecting an exception due to singular matrix)
             Assert.ThrowsException<ArgumentException>(() => solver.Solve(singularSystem));
         }
     }

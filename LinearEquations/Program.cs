@@ -9,11 +9,22 @@ public class Program
 {
     public static void Main()
     {
-        var input = File.ReadAllText("input.txt");
-        var systems = input.Split(new[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+        Console.WriteLine("choose a method. 1 - the Gauss method. 2 - the Jacobi method");
 
-        var gaussianSolver = new GaussianSolver();
-        var jacobiSolver = new JacobiSolver();
+        int mode = Convert.ToInt32(Console.ReadKey().KeyChar.ToString());
+
+        if (mode != 1 && mode != 2)
+        {
+            throw new Exception("There is no such mode");
+        }
+        Console.Clear();
+
+        var input = File.ReadAllText("input.txt");
+        var systems = input.Split(new[] { "\r\n\r\n", "\n\n" }, 
+        StringSplitOptions.RemoveEmptyEntries);
+
+            var gaussianSolver = new GaussianSolver();
+            var jacobiSolver = new JacobiSolver();
 
         foreach (var systemInput in systems)
         {
@@ -24,25 +35,29 @@ public class Program
             {
                 system[i] = Array.ConvertAll(lines[i].Split(), double.Parse);
             }
-
-            try
+            if (mode == 1)
             {
-                var gaussianSolution = gaussianSolver.Solve(system);
-                Console.WriteLine("Gaussian method solution: " + string.Join(", ", gaussianSolution));
+                try
+                {
+                    var gaussianSolution = gaussianSolver.Solve(system);
+                    Console.WriteLine("Gaussian method solution: " + string.Join(", ", gaussianSolution));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Gaussian method error: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            if (mode == 2)
             {
-                Console.WriteLine("Gaussian method error: " + ex.Message);
-            }
-
-            try
-            {
-                var jacobiSolution = jacobiSolver.Solve(system);
-                Console.WriteLine("Jacobi method solution: " + string.Join(", ", jacobiSolution));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Jacobi method error: " + ex.Message);
+                try
+                {
+                    var jacobiSolution = jacobiSolver.Solve(system);
+                    Console.WriteLine("Jacobi method solution: " + string.Join(", ", jacobiSolution));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Jacobi method error: " + ex.Message);
+                }
             }
 
             Console.WriteLine();
